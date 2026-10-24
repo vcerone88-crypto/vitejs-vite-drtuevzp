@@ -8,15 +8,15 @@ Original root lock audit: critical 0, high 7, moderate 1, low 1. Current correct
 
 ## Changes
 
-Refresh locked dependency versions without changing application behavior. The original App.tsx/component contracts and missing date-format exports already fail TypeScript compilation; no production release is allowed until those independent source errors are resolved.
+Refresh locked dependency versions without changing application behavior. The baseline had eight pre-existing TypeScript errors. Repaired caller/component prop contracts and date-format exports so the patched dependency set can be built. Optional destructive callbacks remain absent where the application has no implementation; their controls are hidden instead of wiring data deletion or reset.
 
 Supported execution: patched Node.js 22.23.4 or 24.22.1; Clinical Case Studio requires the 24.x line. Dependabot and scheduled/pull-request dependency audit now cover all maintained lock scopes. GitHub Actions are pinned to verified commit SHAs. No advisory is hidden or ignored.
 
-Conservative Vercel response headers are configured for the SPA. Native build dependency updates use the frozen npm lockfile.
+Conservative Vercel response headers are configured for the SPA. Build dependencies use the frozen npm lockfile.
 
 ## Verification and release gates
 
-Dependency audit PASS; build blocked by eight existing application TypeScript errors. Security dependency changes alone do not make this project releasable.
+Dependency audit PASS (zero advisories). Production build PASS after the eight pre-existing TypeScript errors were corrected; a dedicated clean-install/build CI job validates the proposed source. No production deployment is configured for this legacy project.
 
 Changes are proposed through a security branch and pull request; this file does not assert a production rollout. Validate deployed commit, public health and unauthorized access, response headers and synthetic login/upload flows after release. Roll back the application commit if these regress; no database schema migration is introduced by this patch.
 
