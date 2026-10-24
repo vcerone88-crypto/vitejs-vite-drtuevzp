@@ -1,5 +1,17 @@
 import type { Movimento, Paziente } from './types';
 
+export function oggi(): string {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+}
+
+export function formatDataDisplay(iso: string): string {
+  const date = new Date(`${iso.slice(0, 10)}T12:00:00`);
+  return Number.isNaN(date.getTime()) ? iso : date.toLocaleDateString('it-IT', {
+    day: 'numeric', month: 'short', year: 'numeric',
+  });
+}
+
 export function formatEuro(valore: number): string {
   return new Intl.NumberFormat('it-IT', {
     style: 'currency', currency: 'EUR', maximumFractionDigits: 0,

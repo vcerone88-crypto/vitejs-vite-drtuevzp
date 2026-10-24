@@ -70,8 +70,7 @@ export default function App() {
           <HomeScreen
             movimenti={movimenti}
             pazienti={pazienti}
-            onNuovaEntrata={() => setSheetMov({ tipo: 'entrata' })}
-            onNuovaUscita={() => setSheetMov({ tipo: 'uscita' })}
+            onNuovo={(tipo) => setSheetMov({ tipo })}
             onVediTutti={() => setTab('movimenti')}
           />
         )}
@@ -89,7 +88,7 @@ export default function App() {
             pazienti={pazienti}
             movimenti={movimenti}
             onApri={(id) => setPazienteAperto(id)}
-            onNuovoPaziente={() => setSheetPaz(true)}
+            onAggiungi={() => setSheetPaz(true)}
           />
         )}
 
@@ -127,15 +126,16 @@ export default function App() {
 
       {sheetMov && (
         <NuovoMovimentoSheet
-          initial={sheetMov}
+          tipoIniziale={sheetMov.tipo}
+          pazienteIdIniziale={sheetMov.pazienteId}
           pazienti={pazienti}
-          onChiudi={() => setSheetMov(null)}
+          onClose={() => setSheetMov(null)}
           onSalva={aggiungiMovimento}
         />
       )}
       {sheetPaz && (
         <NuovoPazienteSheet
-          onChiudi={() => setSheetPaz(false)}
+          onClose={() => setSheetPaz(false)}
           onSalva={aggiungiPaziente}
         />
       )}

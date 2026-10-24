@@ -8,7 +8,7 @@ export function PazientiScreen({
   movimenti: Movimento[];
   onAggiungi: () => void;
   onApri: (id: string) => void;
-  onElimina: (id: string) => void;
+  onElimina?: (id: string) => void;
 }) {
   return (
     <>
@@ -48,12 +48,12 @@ export function PazientiScreen({
                     <p className="patient__name">{nomeCompleto(p)}</p>
                     <p className="patient__plan">{p.piano}</p>
                   </div>
-                  <button
+                  {onElimina && <button
                     className="row__delete"
                     type="button"
                     onClick={(e) => { e.stopPropagation(); onElimina(p.id); }}
                     aria-label="Elimina paziente"
-                  >×</button>
+                  >×</button>}
                 </div>
                 <div className="patient__bar">
                   <div className="patient__bar-fill" style={{ width: `${percent}%` }} />
