@@ -12,6 +12,8 @@ Refresh locked dependency versions without changing application behavior. The or
 
 Supported execution: patched Node.js 22.23.4 or 24.22.1; Clinical Case Studio requires the 24.x line. Dependabot and scheduled/pull-request dependency audit now cover all maintained lock scopes. GitHub Actions are pinned to verified commit SHAs. No advisory is hidden or ignored.
 
+Conservative Vercel response headers are configured for the SPA. Native build dependency updates use the frozen npm lockfile.
+
 ## Verification and release gates
 
 Dependency audit PASS; build blocked by eight existing application TypeScript errors. Security dependency changes alone do not make this project releasable.
